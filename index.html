@@ -99,18 +99,35 @@
         <section class="panel list-panel">
           <div class="panel-head">
             <h2>放映顺序</h2>
-            <span>拖拽片段调整顺序</span>
+            <span>勾选同一镜头的素材，在右侧建成一组；镜头组整块拖动</span>
           </div>
           <div id="segmentList" class="segment-list"></div>
         </section>
 
-        <aside class="panel warning-panel">
-          <h2>试映前核对</h2>
-          <div id="warningList" class="warning-list"></div>
-        </aside>
+        <div class="side-column">
+          <aside class="panel groups-panel">
+            <h2>镜头组整理区</h2>
+            <form id="groupForm" class="group-form">
+              <label>
+                新镜头组名称
+                <input id="groupNameInput" type="text" placeholder="例：开场全景镜头" />
+              </label>
+              <button class="primary" id="groupCreateBtn" type="submit">建成一组</button>
+              <p class="group-hint">在左侧清单勾选素材；备用条目不占可放时长但留在组里，拆开后素材按原位置回清单。</p>
+            </form>
+            <div id="groupSummary" class="group-summary"></div>
+          </aside>
+
+          <aside class="panel warning-panel">
+            <h2>试映前核对</h2>
+            <div id="warningList" class="warning-list"></div>
+          </aside>
+        </div>
       </section>
     </main>
 
+    <script src="storage.js"></script>
+    <script src="grouping.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
