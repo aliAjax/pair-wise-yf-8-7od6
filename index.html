@@ -15,8 +15,12 @@
         </div>
         <div class="hero-stats">
           <div>
-            <span>总时长</span>
+            <span>可放时长</span>
             <strong id="totalDuration">0:00</strong>
+          </div>
+          <div>
+            <span>备用时长</span>
+            <strong id="backupDuration">0:00</strong>
           </div>
           <div>
             <span>破损片段</span>
@@ -98,8 +102,15 @@
 
         <section class="panel list-panel">
           <div class="panel-head">
-            <h2>放映顺序</h2>
-            <span>拖拽片段调整顺序</span>
+            <h2>放映顺序 · 镜头组整理区</h2>
+            <span>勾选散条建组，拖组头 ⠿ 以整组移动</span>
+          </div>
+          <div class="selection-bar">
+            <span>已勾选 <strong id="selectedCount">0</strong> 条（同一素材不能进两组）</span>
+            <div>
+              <button id="buildGroupBtn" class="primary" type="button" disabled>建成镜头组</button>
+              <button id="clearSelectionBtn" type="button" disabled>清空勾选</button>
+            </div>
           </div>
           <div id="segmentList" class="segment-list"></div>
         </section>
@@ -111,6 +122,8 @@
       </section>
     </main>
 
+    <script src="grouping.js"></script>
+    <script src="storage.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

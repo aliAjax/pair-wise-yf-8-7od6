@@ -115,7 +115,7 @@ h2 {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  grid-template-columns: repeat(4, minmax(104px, 1fr));
   gap: 10px;
 }
 
@@ -320,7 +320,205 @@ label {
   line-height: 1.5;
 }
 
-@media (max-width: 1120px) {
+/* ---------- 勾选操作条 ---------- */
+
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: rgba(52, 125, 137, 0.07);
+  padding: 9px 11px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.selection-bar strong {
+  color: var(--cyan);
+  font-size: 15px;
+}
+
+.selection-bar div {
+  display: flex;
+  gap: 8px;
+}
+
+.selection-bar button {
+  padding: 7px 12px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- 镜头组 ---------- */
+
+.group-block {
+  border: 1px solid rgba(52, 125, 137, 0.45);
+  border-radius: 10px;
+  background: rgba(52, 125, 137, 0.06);
+  padding: 8px;
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 4px 8px;
+}
+
+.group-grip {
+  flex: 0 0 auto;
+  cursor: grab;
+  color: var(--cyan);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 4px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  user-select: none;
+}
+
+.group-grip:hover {
+  border-color: var(--cyan);
+  background: #fffdf7;
+}
+
+.group-grip:active {
+  cursor: grabbing;
+}
+
+.group-name {
+  width: auto;
+  min-width: 110px;
+  flex: 1 1 140px;
+  font-weight: 900;
+  padding: 7px 9px;
+}
+
+.group-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.group-meta > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.group-duration {
+  font-size: 17px;
+  color: var(--cyan);
+}
+
+.group-backup-meta {
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(109, 99, 120, 0.14);
+  color: #6d6378 !important;
+}
+
+.group-head-actions {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.group-head-actions button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.group-body {
+  display: grid;
+  gap: 8px;
+}
+
+.member-hidden-hint {
+  margin: 2px 4px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.group-block.dragging .group-body,
+.group-head.dragging .group-meta,
+.group-head.dragging .group-head-actions,
+.group-head.dragging .group-name {
+  opacity: 0.45;
+}
+
+/* ---------- 清单散条卡片 ---------- */
+
+.segment-card.selectable {
+  grid-template-columns: auto 112px 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.pick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pick input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cyan);
+  cursor: pointer;
+}
+
+.segment-card.group-member {
+  background: #fffdf7;
+  border-color: rgba(52, 125, 137, 0.3);
+  cursor: default;
+}
+
+.segment-card.group-member .thumb {
+  border-color: rgba(52, 125, 137, 0.55);
+}
+
+/* ---------- 备用 ---------- */
+
+.segment-card.is-backup {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(109, 99, 120, 0.05) 0 8px,
+    #fffdf7 8px 16px
+  );
+}
+
+.tag.backup {
+  background: rgba(109, 99, 120, 0.16);
+  color: #6d6378;
+}
+
+.duration-backup {
+  color: #6d6378;
+  text-decoration: line-through;
+}
+
+button.is-backup-on {
+  border-color: #6d6378;
+  background: rgba(109, 99, 120, 0.16);
+  color: #5a5164;
+}
+
+.segment-card.dragging {
+  opacity: 0.55;
+}
+
+/* ---------- 响应式 ---------- */
   .hero {
     align-items: stretch;
     flex-direction: column;
@@ -330,6 +528,10 @@ label {
   .layout {
     grid-template-columns: 1fr;
   }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 660px) {
@@ -338,11 +540,19 @@ label {
   }
 
   .hero-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .segment-card {
     grid-template-columns: 1fr;
+  }
+
+  .segment-card.selectable {
+    grid-template-columns: 1fr;
+  }
+
+  .pick {
+    justify-self: end;
   }
 
   .segment-actions {
@@ -351,5 +561,9 @@ label {
 
   .segment-actions button {
     width: 100%;
+  }
+
+  .group-head {
+    flex-wrap: wrap;
   }
 }
